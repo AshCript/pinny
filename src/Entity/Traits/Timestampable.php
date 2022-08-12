@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Entity\Traits;
+
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
+
 trait Timestampable
 {
   /**
