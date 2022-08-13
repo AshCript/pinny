@@ -5,5 +5,11 @@
   <p>{{ pin.title }}</p>
   <p>{{ pin.description }}</p>
   <p>{{ pin.createdAt|date("m/d/Y") }} {{ pin.createdAt|date("H:i") }}</p>
+  <a href={{ path('app_pin_edit', {id: pin.id}) }}>Modifier</a> |
+  <a href="#" onClick="event.preventDefault(); confirm('Êtes-vous sûr?') && document.querySelector('#form_delete').submit();">Supprimer</a> |
   <a href= {{ path('app_home') }}>Go back</a>
+  <form id="form_delete" action={{ path('app_pin_delete', {id: pin.id}) }} method="post" style="display: none">
+    <input type="hidden" name="csrf_token" value={{ csrf_token('pin_deletion_' ~ pin.id) }}>
+    {# <input type="hidden" name="_method" value="DELETE"> #}
+  </form>
 {% endblock %}

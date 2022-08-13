@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title 'Créer un pin' %}
+
+{% block body %}
+  {{ form_start(pinForm) }}
+    {{ form_widget(pinForm) }}
+    <input type="submit" value="Enregistrer">
+  {{ form_end(pinForm) }}
+{% endblock %}
+
+{% block javascripts %}
+  
+{% endblock %}
