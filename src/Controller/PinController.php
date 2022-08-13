@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PinController extends AbstractController
 {
     /**
-     * @Route("/", name="app_home", methods={"GET"})
+     * @Route("/", name="app_home")
      */
     public function index(PinRepository $pinRepo): Response
     {
@@ -23,7 +23,7 @@ class PinController extends AbstractController
     }
 
     /**
-     * @Route("/pin/create", name="app_pin_create", methods="POST")
+     * @Route("/pin/create", name="app_pin_create")
      */
     public function create(Request $req, EntityManagerInterface $em): Response
     {
@@ -41,7 +41,7 @@ class PinController extends AbstractController
     }
 
     /**
-     * @Route("/pin/{id}/edit", name="app_pin_edit", methods={"POST", "GET"})
+     * @Route("/pin/{id}/edit", name="app_pin_edit")
      */
     public function update(Pin $pin, Request $req, EntityManagerInterface $em): Response
     {
@@ -70,7 +70,7 @@ class PinController extends AbstractController
     }
 
     /**
-     * @Route("/pin/{id}", name="app_pin_detail", methods={"GET"})
+     * @Route("/pin/{id}", name="app_pin_detail")
      */
     public function detail(Pin $pin): Response
     {
