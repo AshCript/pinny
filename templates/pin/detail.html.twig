@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block title pin.title %}
+{% block body %}
+  <p>{{ pin.title }}</p>
+  <p>{{ pin.description }}</p>
+  <p>{{ pin.createdAt|date("m/d/Y") }} {{ pin.createdAt|date("H:i") }}</p>
+  <a href= {{ path('app_home') }}>Go back</a>
+{% endblock %}
