@@ -3,10 +3,14 @@
 {% block title 'Créer un pin' %}
 
 {% block body %}
-  {{ form_start(pinForm) }}
-    {{ form_widget(pinForm) }}
-    <input type="submit" value="Enregistrer">
-  {{ form_end(pinForm) }}
+  <div class="row">
+		<div class="col-md-6 mx-auto">
+      {{ form_start(pinForm) }}
+        {{ form_widget(pinForm) }}
+        <input class="btn btn-primary mt-4" style="width: 100%" type="submit" value="Enregistrer">
+      {{ form_end(pinForm) }}
+		</div>
+	</div>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}

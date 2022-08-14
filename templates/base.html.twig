@@ -12,9 +12,29 @@
         
     </head>
     <body>
-        <a href={{ path('app_home') }}>Accueil</a>
-        <a href={{ path('app_pin_create') }}>Créer un pin</a>
-        {% block body %}{% endblock %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+            <div class="container-fluid container">
+                <a class="navbar-brand" href="#">PINNY</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href={{ path('app_home') }}>Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ path('app_pin_create') }}>Créer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+         </nav>
+        <div class="container">
+        {% block body %}
+        
+        {% endblock %}
+        </div>
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
