@@ -5,7 +5,13 @@
   <p>{{ pin.title }}</p>
   <p>{{ pin.description }}</p>
   <p>{{ pin.createdAt|date("m/d/Y") }} {{ pin.createdAt|date("H:i") }}</p>
-  <p>{{ pin.createdAt|ago }}</p>
+  <p>
+    {% if pin.createdAt == pin.updatedAt %}
+      Created
+    {% else %}
+      Updated
+    {% endif %}
+   {{ createOrUpdate(pin.createdAt, pin.updatedAt)|ago }}</p>
   <a href={{ path('app_pin_edit', {id: pin.id}) }}>Modifier</a> |
   <a href="#" onClick="event.preventDefault(); confirm('Êtes-vous sûr?') && document.querySelector('#form_delete').submit();">Supprimer</a> |
   <a href= {{ path('app_home') }}>Go back</a>

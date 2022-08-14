@@ -2,6 +2,9 @@
 
 namespace App\Twig;
 
+use DateTime;
+use DateTimeImmutable;
+use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -22,6 +25,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('pluralize', [$this, 'check']),
+            new TwigFunction('createOrUpdate', [$this, 'checkDate'])
         ];
     }
 
@@ -29,5 +33,10 @@ class AppExtension extends AbstractExtension
     {
         $plural ??= $singular."s";
         return $count." ".($count == 1 ? $singular : $plural);
+    }
+
+    public function checkDate(DateTimeImmutable $creation, DateTimeImmutable $edition): DateTimeImmutable
+    {
+        return ($creation == $edition) ? $creation : $edition;
     }
 }

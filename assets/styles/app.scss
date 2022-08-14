@@ -1,6 +1,8 @@
 @import "~bootstrap";
 @import "variables";
 
-body {
-    background-color: $mycolor;
+body{
+    background-color: $bodyBgColor;
+    color: $bodyFgColor;
 }
+
