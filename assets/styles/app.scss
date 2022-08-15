@@ -6,3 +6,17 @@ body{
     color: $bodyFgColor;
 }
 
+.vich-image{
+    align-items: center;
+    a{
+        display: block;
+        width: 100%;
+        text-align: center;
+        img{
+            @extend .mb-2;
+            @extend .rounded;
+            @extend .shadow;
+            @extend .img-thumbnail;
+        }
+    }
+}

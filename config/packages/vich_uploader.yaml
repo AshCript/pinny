@@ -4,7 +4,7 @@ vich_uploader:
     mappings:
        pinny_image:
             uri_prefix: /uploads/products
-            upload_destination: '%kernel.project_dir%/public/images/products'
+            upload_destination: '%kernel.project_dir%/public/uploads/products'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
             inject_on_load: false
