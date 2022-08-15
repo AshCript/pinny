@@ -1,6 +1,9 @@
 @import "~bootstrap";
 @import "variables";
 
+*{
+    scrollbar-width: none;
+}
 body{
     background-color: $bodyBgColor;
     color: $bodyFgColor;
@@ -17,6 +20,101 @@ body{
             @extend .rounded;
             @extend .shadow;
             @extend .img-thumbnail;
+        }
+    }
+}
+
+.detail-container{
+    position: relative;
+    background-color: rgb(6, 6, 6);
+    border: 2px solid white;
+    padding: 0;
+    margin: 0;
+    // @extend .shadow;
+    @extend .rounded;
+    box-shadow: 0px 0px 8px 2px #3d3d3d;
+    img{
+        @extend .rounded;
+    }
+    .card-footer-buttons{
+        position: relative;
+    }
+    .detail-publication-info{
+        position: relative;
+        font-size: x-small;
+        color: rgb(136, 136, 136);
+        text-align: right;
+        padding-right: 10px;
+    }
+}
+
+.card-body{
+    h4{
+        text-align: justify;
+        height: 200px; 
+        overflow: auto;
+    }
+}
+
+.card-container{
+    box-shadow: 0 0 0 2px white;
+    background-color: rgb(7, 7, 7);
+    border: 1px solid white;
+    .card-image-container{
+        overflow: hidden;
+        height: 300px;
+        img{
+            position: relative;
+            left: 0;
+            top: 0;
+            transition-duration: .5s;
+            &:hover{
+                width: 400px;
+                left: -20px;
+                top: -20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .card-container{
+        .card-image-container{
+            height: 400px;
+            img{
+                position: relative;
+                left: 0;
+                top: 0;
+                transition-duration: .5s;
+                &:hover{
+                    width: 500px;
+                    left: -20px;
+                    top: -20px;
+                }
+            }
+        }
+    }   
+}
+
+@media screen and (min-width: 800px) {
+    .detail-container{
+        position: relative;
+        background-color: rgb(6, 6, 6);
+        padding: 0;
+        margin: 0;
+        // @extend .shadow;
+        @extend .rounded;
+        img{
+            @extend .rounded;
+        }
+        .card-footer-buttons{
+            position: absolute;
+            bottom: 20px;
+        }
+        .detail-publication-info{
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
         }
     }
 }

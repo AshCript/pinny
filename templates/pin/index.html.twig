@@ -3,14 +3,28 @@
 {% block title 'Pinny list' %}
 
 {% block body %}
-
-<div>
-    <h2>{{pluralize(pins|length, 'pin', 'pins')}}</h2>
-    {% for pin in pins %}
-        <article>
-            <a href={{ path('app_pin_detail', {id: pin.id}) }}>{{pin.title}}</a>
-            <p>{{pin.description}}</p>
-        </article>
+<article>
+    <h2 class="text-center mb-3">{{pluralize(pins|length, 'pin', 'pins')}}</h2>
+    {% for row in pins|batch(3) %}
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        {% for pin in row %}
+            <div class="col">
+                <div class="card text-white mb-3 card-container">
+                    <div class="card-image-container">
+                        <a href="{{ path('app_pin_detail', {'id': pin.id}) }}">
+                            <img src="{{ (pin.imageName != null ? vich_uploader_asset(pin) : asset('images/default.png'))|imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.imageName }}" class="card-img-top" alt="...">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title h2">{{ pin.title }}</h5>
+                        <p class="card-text text-muted">This is a longer car...</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+            {# <a href={{ path('app_pin_detail', {id: pin.id}) }}>{{pin.title}}</a>
+            <p>{{pin.description}}</p> #}
+        </div>
     {% endfor %}
-</div>
+</article>
 {% endblock %}

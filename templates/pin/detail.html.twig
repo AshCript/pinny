@@ -2,21 +2,33 @@
 
 {% block title pin.title %}
 {% block body %}
-  <p>{{ pin.title }}</p>
-  <p>{{ pin.description }}</p>
-  <p>{{ pin.createdAt|date("m/d/Y") }} {{ pin.createdAt|date("H:i") }}</p>
-  <p>
-    {% if pin.createdAt == pin.updatedAt %}
-      Created
-    {% else %}
-      Updated
-    {% endif %}
-   {{ createOrUpdate(pin.createdAt, pin.updatedAt)|ago }}</p>
-  <a href={{ path('app_pin_edit', {id: pin.id}) }}>Modifier</a> |
-  <a href="#" onClick="event.preventDefault(); confirm('Êtes-vous sûr?') && document.querySelector('#form_delete').submit();">Supprimer</a> |
-  <a href= {{ path('app_home') }}>Go back</a>
-  <form id="form_delete" action={{ path('app_pin_delete', {id: pin.id}) }} method="post" style="display: none">
-    <input type="hidden" name="csrf_token" value={{ csrf_token('pin_deletion_' ~ pin.id) }}>
-    {# <input type="hidden" name="_method" value="DELETE"> #}
-  </form>
+  <br/>
+  <div class="card">
+    <div class="row detail-container">
+      <div class="col-md-4" style="padding: 0px;">
+        <img style="width: 100%" src="{{ (pin.imageName != null ? vich_uploader_asset(pin) : asset('images/default.png'))|imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.imageName }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body" style="max-height: 400px;">
+          <div class="h1">{{ pin.title }}</div>
+          <hr/>
+          <div class="h4">{{ pin.description }}</div>
+          <div class="detail-publication-info">
+            <p>Created by [USER_PUBLISHER] at {{ pin.createdAt|date("Y/m/d") }} {{ pin.createdAt|date("H:i") }}
+            {% if pin.createdAt != pin.updatedAt %}
+            <br/>Updated {{ createOrUpdate(pin.createdAt, pin.updatedAt)|ago }}</p>
+            {% endif %}
+          </div>
+        <div class="card-footer-buttons">
+          <a class="btn btn-dark" href={{ path('app_pin_edit', {id: pin.id}) }}>Modifier</a>
+          <a class="btn btn-dark" href="#" onClick="event.preventDefault(); confirm('Êtes-vous sûr?') && document.querySelector('#form_delete').submit();">Supprimer</a>
+          <form id="form_delete" action={{ path('app_pin_delete', {id: pin.id}) }} method="post" style="display: none">
+            <input type="hidden" name="csrf_token" value={{ csrf_token('pin_deletion_' ~ pin.id) }}>
+            {# <input type="hidden" name="_method" value="DELETE"> #}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
