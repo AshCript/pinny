@@ -25,3 +25,10 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> Vich/uploaer-bundle ###
+/public/uploads/
+###< Vich/uploaer-bundle ###
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

@@ -7,10 +7,13 @@ use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PinRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Pin
 {
@@ -36,6 +39,19 @@ class Pin
      * @Assert\Length(min=10, minMessage="La description doit être longue")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="pinny_image", fileNameProperty="imageName")
+     * @Assert\Image(maxSize="8M")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
 
 
     public function getId(): ?int
@@ -65,5 +81,34 @@ class Pin
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+
+        if($imageFile !== null){
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
     }
 }
