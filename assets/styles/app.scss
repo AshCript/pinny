@@ -74,6 +74,29 @@ body{
     }
 }
 
+.flash-message-container{
+    opacity: 0;
+    animation-name: flashMessageContainerAnimation;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+}
+
+@keyframes flashMessageContainerAnimation {
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    95%{
+        opacity: 0;
+    }
+    100%{
+        display: none;
+    }
+}
+
+
 @media screen and (max-width: 500px) {
     .card-container{
         .card-image-container{

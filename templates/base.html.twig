@@ -35,10 +35,12 @@
             </nav>
             {% for type, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{type}} d-flex align-items-center" style="border-radius: 0;" role="alert">
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="{{type}}:"><use xlink:href="#check-circle-fill"/></svg>
-                        <div class="text-center" style="margin: auto;">
-                            {{ message }}
+                    <div class="flash-message-container">
+                        <div class="alert alert-{{type}} d-flex align-items-center" style="border-radius: 0;" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="{{type}}:"><use xlink:href="#check-circle-fill"/></svg>
+                            <div class="text-center" style="margin: auto;">
+                                {{ message }}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
