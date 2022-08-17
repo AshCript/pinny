@@ -10,9 +10,9 @@
         {% for pin in row %}
             <div class="col">
                 <div class="card text-white mb-3 card-container">
-                    <div class="card-image-container">
+                    <div class="card-image-container rounded-top">
                         <a href="{{ path('app_pin_detail', {'id': pin.id}) }}">
-                            <img src="{{ (pin.imageName != null ? vich_uploader_asset(pin) : asset('images/default.png'))|imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.imageName }}" class="card-img-top" alt="...">
+                            <img src="{{ (pin.imageName != null ? vich_uploader_asset(pin) : asset('build/images/default.png'))|imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.imageName }}" class="card-img-top" alt="...">
                         </a>
                     </div>
                     <div class="card-body">
