@@ -77,7 +77,8 @@ body{
 @media screen and (max-width: 500px) {
     .card-container{
         .card-image-container{
-            height: 400px;
+            min-height: 200px;
+            max-height: 400px;
             img{
                 position: relative;
                 left: 0;

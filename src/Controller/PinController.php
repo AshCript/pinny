@@ -33,6 +33,7 @@ class PinController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $em->persist($pin);
             $em->flush();
+            $this->addFlash('success', 'Pinny '.$pin->getTitle().' saved successfuly');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('pin/form.html.twig', [
@@ -49,6 +50,7 @@ class PinController extends AbstractController
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
             $em->flush();
+            $this->addFlash('success', 'Pinny '.$pin->getTitle().' updated successfuly');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('pin/form.html.twig', [
@@ -64,6 +66,7 @@ class PinController extends AbstractController
         if($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(), $req->request->get('csrf_token'))){
             $em->remove($pin);
             $em->flush();
+            $this->addFlash('danger', 'Pinny '.$pin->getTitle().' deleted successfuly');
         }
 
         return $this->redirectToRoute('app_home');

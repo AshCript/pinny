@@ -14,30 +14,42 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 fixed-top">
-            <div class="container-fluid container">
-                <a class="navbar-brand" href={{ path('app_home') }}>PINNY</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href={{ path('app_home') }}>Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href={{ path('app_pin_create') }}>Create a pinny</a>
-                        </li>
-                    </ul>
+        <div class="fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid container">
+                    <a class="navbar-brand" href={{ path('app_home') }}>PINNY</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href={{ path('app_home') }}>Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href={{ path('app_pin_create') }}>Create a pinny</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-         </nav>
+            </nav>
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{type}} d-flex align-items-center" style="border-radius: 0;" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="{{type}}:"><use xlink:href="#check-circle-fill"/></svg>
+                        <div class="text-center" style="margin: auto;">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         <div class="container mb-4" style="margin-top: 60px;">
         {% block body %}
         
         {% endblock %}
         </div>
-        
+            
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
     </body>
