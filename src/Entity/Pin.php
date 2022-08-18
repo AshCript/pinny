@@ -124,7 +124,7 @@ class Pin
 
     public function setUser(?User $user): self
     {
-        $this->owner = $user;
+        $this->user = $user;
 
         return $this;
     }

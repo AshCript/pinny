@@ -14,7 +14,7 @@
           <hr/>
           <div class="h4">{{ pin.description }}</div>
           <div class="detail-publication-info">
-            <p>Created by [USER_PUBLISHER] at {{ pin.createdAt|date("Y/m/d") }} {{ pin.createdAt|date("H:i") }}
+            <p>Created by {{ pin.user.firstName }} {{ pin.user.lastName }} at {{ pin.createdAt|date("Y/m/d") }} {{ pin.createdAt|date("H:i") }}
             {% if pin.createdAt != pin.updatedAt %}
             <br/>Updated {{ createOrUpdate(pin.createdAt, pin.updatedAt)|ago }}</p>
             {% endif %}
