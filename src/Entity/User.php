@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Pin::class, mappedBy="owner", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Pin::class, mappedBy="user", orphanRemoval=true)
      */
     private $pins;
 
