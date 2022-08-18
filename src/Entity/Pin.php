@@ -52,6 +52,12 @@ class Pin
      */
     private $imageFile;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pins")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
 
     public function getId(): ?int
     {
@@ -109,5 +115,17 @@ class Pin
         if($imageFile !== null){
             $this->setUpdatedAt(new \DateTimeImmutable);
         }
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->owner = $user;
+
+        return $this;
     }
 }
