@@ -90,6 +90,13 @@ class PinController extends AbstractController
         return $this->render('pin/detail.html.twig', compact('pin'));
     }
 
+
+    /**
+     * This function just checks if an user is logged in, then, it redirects to the app_login root if no user is logged in yet.
+     * NOTE : The $this->getUser() returns the current user from the previous session and based on token.
+     *
+     * @return void
+     */
     private function checkUser()
     {
         if(!($this->getUser())){
