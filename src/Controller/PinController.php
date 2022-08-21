@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class PinController extends AbstractController
 {
     /**
-     * @Route("/", name="app_home")
+     * @Route("/home", name="app_home")
      */
     public function index(PinRepository $pinRepo, Request $req): Response
     {
