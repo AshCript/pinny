@@ -23,9 +23,7 @@ class PinController extends AbstractController
      */
     public function index(PinRepository $pinRepo, Request $req): Response
     {
-        if(!($this->getUser())){
-            return $this->redirectToRoute('app_login');
-        }
+        $this->checkUser();
         $pins = $pinRepo->findBy([], ["createdAt" => "DESC"]);
         return $this->render('pin/index.html.twig', compact('pins'));
     }
@@ -35,10 +33,7 @@ class PinController extends AbstractController
      */
     public function create(Request $req, EntityManagerInterface $em): Response
     {
-        if(!($this->getUser())){
-            return $this->redirectToRoute('app_login');
-        }
-
+        $this->checkUser();
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($req);
@@ -58,10 +53,7 @@ class PinController extends AbstractController
      */
     public function update(Pin $pin, Request $req, EntityManagerInterface $em): Response
     {
-        if(!($this->getUser())){
-            return $this->redirectToRoute('app_login');
-        }
-
+        $this->checkUser();
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
@@ -79,9 +71,7 @@ class PinController extends AbstractController
      */
     public function delete(Pin $pin, Request $req, EntityManagerInterface $em): Response
     {
-        if(!($this->getUser())){
-            return $this->redirectToRoute('app_login');
-        }
+        $this->checkUser();
         if($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(), $req->request->get('csrf_token'))){
             $em->remove($pin);
             $em->flush();
@@ -96,10 +86,15 @@ class PinController extends AbstractController
      */
     public function detail(Pin $pin, Request $req): Response
     {
-        if(!($this->getUser())){
-            return $this->redirectToRoute('app_login');
-        }
+        $this->checkUser();
         return $this->render('pin/detail.html.twig', compact('pin'));
     }
 
+    private function checkUser()
+    {
+        if(!($this->getUser())){
+            $this->addFlash('error', 'It seems like you\'re not logged in yet!');
+            return $this->redirectToRoute('app_login');
+        }
+    }
 }
