@@ -3,21 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Entity\User;
 use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\RequestHandlerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RequestContextAwareInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class PinController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
      */
-    public function index(PinRepository $pinRepo): Response
+    public function index(PinRepository $pinRepo, Request $req): Response
     {
+        if(!($this->getUser())){
+            return $this->redirectToRoute('app_login');
+        }
         $pins = $pinRepo->findBy([], ["createdAt" => "DESC"]);
         return $this->render('pin/index.html.twig', compact('pins'));
     }
@@ -27,6 +35,10 @@ class PinController extends AbstractController
      */
     public function create(Request $req, EntityManagerInterface $em): Response
     {
+        if(!($this->getUser())){
+            return $this->redirectToRoute('app_login');
+        }
+
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($req);
@@ -46,6 +58,10 @@ class PinController extends AbstractController
      */
     public function update(Pin $pin, Request $req, EntityManagerInterface $em): Response
     {
+        if(!($this->getUser())){
+            return $this->redirectToRoute('app_login');
+        }
+
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
@@ -63,6 +79,9 @@ class PinController extends AbstractController
      */
     public function delete(Pin $pin, Request $req, EntityManagerInterface $em): Response
     {
+        if(!($this->getUser())){
+            return $this->redirectToRoute('app_login');
+        }
         if($this->isCsrfTokenValid('pin_deletion_'.$pin->getId(), $req->request->get('csrf_token'))){
             $em->remove($pin);
             $em->flush();
@@ -75,8 +94,11 @@ class PinController extends AbstractController
     /**
      * @Route("/pin/{id}", name="app_pin_detail")
      */
-    public function detail(Pin $pin): Response
+    public function detail(Pin $pin, Request $req): Response
     {
+        if(!($this->getUser())){
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('pin/detail.html.twig', compact('pin'));
     }
 
