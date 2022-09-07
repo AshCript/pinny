@@ -60,6 +60,9 @@ class RegistrationController extends AbstractController
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context([
+                        'expiration_date' => new \DateTime('+7 days')
+                    ])
             );
             // do anything else you need here, like send an email
             
