@@ -12,15 +12,25 @@
             {{ form_start(registrationForm) }}
                 <div class="row">
                     <div class="col-md-6">
-                        {{ form_row(registrationForm.firstName) }}
+                        {{ form_row(registrationForm.firstName, {'attr' : {
+                            'class': 'input-dark'
+                        }}) }}
                     </div>
                     <div class="col-md-6">
-                        {{ form_row(registrationForm.lastName) }}
+                        {{ form_row(registrationForm.lastName, {'attr' : {
+                            'class': 'input-dark'
+                        }}) }}
                     </div>
                 </div>
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.plainPassword) }}
-                {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_row(registrationForm.email, {'attr': {
+                    'class': 'input-dark'
+                }}) }}
+                {{ form_row(registrationForm.plainPassword, {'attr' : {
+                    'class': 'input-dark'
+                }}) }}
+                {{ form_row(registrationForm.agreeTerms, {'attr' : {
+                    'style' : 'background-color: rgb(50, 200, 200);'
+                }}) }}
 
                 <button type="submit" class="btn btn-primary btn-lg" style='width: 100%;' >Register</button>
             {{ form_end(registrationForm) }}

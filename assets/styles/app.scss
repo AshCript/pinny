@@ -99,6 +99,18 @@ body{
     }
 }
 
+.input-dark{
+    background-color:rgb(34, 34, 34);
+    color: rgb(196, 196, 196);
+    border: 1px solid black;
+
+    &:focus{
+        background-color:rgb(34, 34, 34);
+        color: rgb(196, 196, 196);
+        border: 1px solid black;
+    }
+}
+
 
 @media screen and (max-width: 500px) {
     .card-container{
